@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Save, FileDown, Upload, 
-  Plus, Copy, Trash, FilePlus, 
-  RotateCcw, History 
+  Copy, Trash, FilePlus, 
+   History 
 } from 'lucide-react';
 import { useContext } from 'react';
 import { DocumentContext } from '../context/DocumentContext';
