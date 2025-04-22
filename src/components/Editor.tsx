@@ -1,23 +1,27 @@
-import React, { useRef, useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { DocumentContext } from '../context/DocumentContext';
 import { calculatePageCount } from '../utils/documentUtils';
+interface EditorProps {
+  editorRef: React.RefObject<HTMLDivElement>;
+}
 
-const Editor: React.FC = () => {
+const Editor: React.FC<EditorProps> = ({ editorRef }) => {
+  
   const { documentState } = useContext(DocumentContext);
-  const editorRef = useRef<HTMLDivElement>(null);
   const [pages, setPages] = useState<number[]>([1]);
   
   useEffect(() => {
     if (editorRef.current) {
       editorRef.current.focus();
     }
-  }, []);
+  }, [editorRef]);
+
 
   useEffect(() => {
     const content = editorRef.current?.innerHTML || '';
     const totalPages = calculatePageCount(content);
     setPages(Array.from({ length: totalPages }, (_, i) => i + 1));
-  }, [documentState.content]);
+  }, [documentState.content, editorRef]);
 
   const insertHorizontalLine = () => {
     const selection = window.getSelection();

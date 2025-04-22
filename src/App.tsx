@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import  { useState,useRef } from 'react';
 import Sidebar from './components/Sidebar';
 import Editor from './components/Editor';
 import Toolbar from './components/Toolbar';
@@ -7,6 +7,8 @@ import { File, FileMinus as FileMenu, Save, Settings } from 'lucide-react';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const editorRef = useRef<HTMLDivElement>(null); // ✅ define editorRef here
+
   
   return (
     <DocumentProvider>
@@ -39,8 +41,8 @@ function App() {
           
           {/* Editor Container */}
           <div className="flex-1 flex flex-col overflow-hidden">
-            <Toolbar />
-            <Editor />
+          <Toolbar editorRef={editorRef} />
+          <Editor editorRef={editorRef} />
           </div>
         </div>
       </div>
